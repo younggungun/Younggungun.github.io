@@ -776,6 +776,125 @@
       </tags>
   </entry>
   <entry>
+    <title>Landset8图像处理和水体提取</title>
+    <url>/2020/06/01/Landset8%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%92%8C%E6%B0%B4%E4%BD%93%E6%8F%90%E5%8F%96/</url>
+    <content><![CDATA[<h2 id="一、图像处理整体思路步骤"><a href="#一、图像处理整体思路步骤" class="headerlink" title="一、图像处理整体思路步骤"></a>一、图像处理整体思路步骤</h2><h3 id="1、多光谱波段"><a href="#1、多光谱波段" class="headerlink" title="1、多光谱波段"></a>1、多光谱波段</h3><p><img data-src="D:/hexo_blog/source/_posts/%E5%AF%BC%E5%85%A5Landset8%E5%BD%B1%E5%83%8F.png" alt="avatar"></p>
+<h4 id="1-1多光谱波段的辐射定标"><a href="#1-1多光谱波段的辐射定标" class="headerlink" title="1.1多光谱波段的辐射定标"></a>1.1多光谱波段的辐射定标</h4><h5 id="1-1-1-Envi导入Landset8影像"><a href="#1-1-1-Envi导入Landset8影像" class="headerlink" title="1.1.1 Envi导入Landset8影像"></a>1.1.1 Envi导入Landset8影像</h5><p><img data-src="D:/hexo_blog/source/_posts/%E5%AF%BC%E5%85%A5Landset8%E5%BD%B1%E5%83%8F.png" alt="avatar"></p>
+<hr>
+<p><strong>Landset8波段调整</strong></p>
+<ul>
+<li><p>OLI对波段进行了重新调整，比较大的调整是OLI Band5(0.845–0.885 μm)，排除了0.825μm处水汽吸收特征；</p>
+</li>
+<li><p>OLI全色波段Band8波段范围较窄，这种方式可以在全色图像上更好区分植被和无植被特征；</p>
+</li>
+<li><p>此外，还有两个新增的波段：蓝色波段 (band 1; 0.433–0.453 μm) 主要应用海岸带观测，短波红外波段(band 9; 1.360–1.390 μm) 包括水汽强吸收特征可用于云检测；</p>
+</li>
+<li><p>近红外band5和短波红外band9与MODIS对应的波段接近，详情参考表。</p>
+</li>
+</ul>
+<hr>
+<p><strong>波段组合</strong></p>
+<p><img data-src="D:/hexo_blog/source/_posts/OLI%E6%B3%A2%E6%AE%B5%E7%BB%84%E5%90%88.png" alt="avatar"></p>
+<p><img data-src="D:/hexo_blog/source/_posts/OLI%E6%B3%A2%E6%AE%B5%E7%BB%84%E5%90%88%E8%AF%B4%E6%98%8E.png" alt="avatar"></p>
+<p><img data-src="D:/hexo_blog/source/_posts/OLI%E6%B3%A2%E6%AE%B5%E7%BB%84%E5%90%882.png" alt="avatar"></p>
+<hr>
+<p><strong>图像预处理</strong></p>
+<p>由于Landsat数据已经经过几何校正和地形校正，所以<strong>直接进行</strong>辐射定标和大气校正。</p>
+<hr>
+<h5 id="1-1-2多光谱波段辐射定标"><a href="#1-1-2多光谱波段辐射定标" class="headerlink" title="1.1.2多光谱波段辐射定标"></a>1.1.2多光谱波段辐射定标</h5><ul>
+<li>选择File-&gt;Open，选择_MTL.txt文件打开；</li>
+<li>选择ToolBox/Radiometric Correction/Radiometric Calibration，选择多光谱数据（MultiSpectral）；</li>
+<li>参数设置如下：</li>
+</ul>
+<p>​        定标类型（Calibration Type）：辐射亮度值（Radiance）；</p>
+<p>​        输出储存顺序 （Output Interleave）：BIL；</p>
+<p>​        输出数据类型：Float；</p>
+<p>​        单击FLAASH Settings按钮，自动获取辐射亮度单位转换系数Scale Factor：0.1,其他选项是方便用于</p>
+<p>​                FLAASH大气校正；</p>
+<p>​        最后自行设置输出路径。</p>
+<p><img data-src="D:/hexo_blog/source/_posts/%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE1.jpg" alt="avatar"></p>
+<hr>
+<h4 id="1-2多光谱波段的大气校正"><a href="#1-2多光谱波段的大气校正" class="headerlink" title="1.2多光谱波段的大气校正"></a>1.2多光谱波段的大气校正</h4><ul>
+<li>打开Radiometric Correction </li>
+<li>-&gt;Atmospheric Correction Module </li>
+<li>-&gt; FLAASH Atmospheric Correction工具 </li>
+<li>导入经过辐射定标的数据radiometric_result.dat，因为在辐射定标中已经进行了单位换算，所以在弹出的Radiance Scale Factors中选择第二项 </li>
+</ul>
+<img data-src="D:/hexo_blog/source/_posts/大气校正图片1.png" alt="avatar" style="zoom:50%;">
+
+<p>由于FLAASH大气校正需要影像区域的平均高程，所以可以使用ENVI自带全球高程数据进行计算。</p>
+<ul>
+<li><p>File——Open World Data——Elevation,打开ENVI自带的全球900mDEM数据;</p>
+</li>
+<li><p>将需要计算高程数据的影像打开（需要带坐标信息），可以放大看到影像数据叠加在DEM数据上</p>
+</li>
+</ul>
+<p>​    <img data-src="D:/hexo_blog/source/_posts/大气校正图片2.png" alt="avatar" style="zoom:67%;"></p>
+<ul>
+<li>打开工具箱中的Statistics——Compute Statistics,在输入文件对话框中选择GMTED2010.jp2数据，再单击Stats Subset，单击File，选择需要统计高程信息对应的图像，然后OK.</li>
+</ul>
+<p>​    <img data-src="D:/hexo_blog/source/_posts/大气校正图片3.png" alt="avatar" style="zoom: 67%;"></p>
+<ul>
+<li>之后的参数均设置为默认。最后得到统计的平均高程信息，可以看到影像平均高程为256.626m（下图）</li>
+</ul>
+<p>​        <img data-src="D:/hexo_blog/source/_posts/大气校正图片4.png" alt="avatar" style="zoom:67%;"></p>
+<ul>
+<li>随后回到FLAASH工具，设置其他参数。传感器类型Sensor Type为Landsat-8 OLI，平均地面高程Ground Elevation为0.256km，大气模型根据帮助文档中的<strong>大气模型表</strong>进行选择，根据影像成像时间为3月，影像中心纬度为34°确定大气模型为MLS。气溶胶模型选择城市Urban。</li>
+</ul>
+<p>​            <img data-src="D:/hexo_blog/source/_posts/大气校正图片5.png" alt="avatar" style="zoom: 67%;"></p>
+<ul>
+<li>设置的FLAASH参数、</li>
+</ul>
+<p>​        <img data-src="D:/hexo_blog/source/_posts/%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3%E5%9B%BE%E7%89%876.png" alt="avatar"></p>
+<ul>
+<li>同时还要设置多光谱参数，进入Multispectral Settings，将Default设置为Over-Land Retrieval Standard(600：2100)</li>
+</ul>
+<p>​    <img data-src="D:/hexo_blog/source/_posts/大气校正图片7.png" alt="avatar" style="zoom:67%;"></p>
+<ul>
+<li>其他参数按照默认设置，最后点击Apply进行大气校正。大气校正结果如图11所示，会显示估算能见度和平均水汽柱。</li>
+</ul>
+<p>FLAASH过程中出现“内存资源不足”的错误可以参考这篇博客：<a href="https://blog.csdn.net/weixin_43637490/article/details/105590237" target="_blank" rel="noopener">FLAASH大气校正过程中内存资源不足解决方法</a></p>
+<ul>
+<li>FLAASH大气校正结果</li>
+</ul>
+<p>​        <img data-src="D:/hexo_blog/source/_posts/%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3%E5%9B%BE%E7%89%878.png" alt="avatar"></p>
+<hr>
+<h3 id="2、全色波段"><a href="#2、全色波段" class="headerlink" title="2、全色波段"></a>2、全色波段</h3><h4 id="2-1全色波段的辐射定标"><a href="#2-1全色波段的辐射定标" class="headerlink" title="2.1全色波段的辐射定标"></a>2.1全色波段的辐射定标</h4><ul>
+<li><p>选择ToolBox/Radiometric Correction/Radiometric Calibration，选择全色波段（Panchromatic）；</p>
+</li>
+<li><p>参数设置：</p>
+<ul>
+<li>Calibration Type：Reflectance，</li>
+<li>Output Data Type：UInt，</li>
+<li>Scale Factor:10000；</li>
+</ul>
+</li>
+</ul>
+<p><img data-src="D:/hexo_blog/source/_posts/%E5%85%A8%E8%89%B2%E6%B3%A2%E6%AE%B5%E5%9B%BE%E7%89%871.png" alt="avatar"></p>
+<ul>
+<li>点击OK输出</li>
+</ul>
+<hr>
+<h3 id="3、图像融合"><a href="#3、图像融合" class="headerlink" title="3、图像融合"></a>3、图像融合</h3><ul>
+<li>打开 ToolBox/ Image Sharpening /Gram-Schmidt Pan Sharpening</li>
+<li>在文件选择框中分别选择第1.2步中大气校正之后多光谱数据作为低分辨率影像（Low Spatial）</li>
+<li>在文件选择框中第2.1步中辐射定标后的全色数据作为高分辨率影像（High Spatial）</li>
+<li>单击OK。打开Pan Sharpening Parameters面板</li>
+<li>参数设置：<ul>
+<li>Sensor：landsat-8 oli</li>
+<li>重采样方法（Resampling）：Cubic Convolution</li>
+<li>输出格式为：ENVI</li>
+</ul>
+</li>
+</ul>
+<p><img data-src="D:/hexo_blog/source/_posts/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E5%9B%BE%E7%89%871.png" alt="avatar"></p>
+<hr>
+<h2 id="二、水体信息提取"><a href="#二、水体信息提取" class="headerlink" title="二、水体信息提取"></a>二、水体信息提取</h2>]]></content>
+      <tags>
+        <tag>NDWI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo博客nexT主题优化</title>
     <url>/2020/05/31/hexo%E5%8D%9A%E5%AE%A2nexT%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<h1 id="hexo-主题-next7-8-版本配置美化"><a href="#hexo-主题-next7-8-版本配置美化" class="headerlink" title="hexo 主题 next7.8 版本配置美化"></a>hexo 主题 next7.8 版本配置美化</h1><p>网上next主题的配置大多为next5.+或next6.+，在最新版本中对之前的版![2](C:\Users\Lenovo\Pictures\Saved Pictures\2.jpg)本进行了高度的插件化，许多功能都集成在主题配置文件中，同时之前自定义样式配置文件的路径也有所改变，针对于此写下自己的配置记录</p>
@@ -940,7 +1059,7 @@
     <title>hexo博客搭建</title>
     <url>/2020/06/01/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<p> — #安装Nodejs<br>node -v #查看node版本<br>npm -v #查看npm版本<br>npm install -g cnpm –registry=<a href="http://registry.npm.taobao.org" target="_blank" rel="noopener">http://registry.npm.taobao.org</a> #安装淘宝的cnpm 管理器<br>cnpm -v #查看cnpm版本<br>cnpm install -g hexo-cli #安装hexo框架<br>hexo -v #查看hexo版本<br>mkdir blog #创建blog目录<br>cd blog #进入blog目录<br>hexo init #生成博客 初始化博客</p>
-<p> <img data-src="image-20200516170333761.png" alt="avatar">g))</p>
+<p> <img data-src="image-20200516170333761.png" alt="avatar"></p>
 <p>hexo s #启动本地博客服务</p>
 <p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516170405967.png" alt="image-20200516170405967"></p>
 <p>本地启动用来预览</p>
