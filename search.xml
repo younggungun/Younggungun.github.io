@@ -776,10 +776,118 @@
       </tags>
   </entry>
   <entry>
+    <title>Maven学习笔记</title>
+    <url>/2020/06/02/Maven%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="一、Maven的作用"><a href="#一、Maven的作用" class="headerlink" title="一、Maven的作用"></a>一、Maven的作用</h1><ul>
+<li>maven可以管理jar包</li>
+<li>自动下载jar和源代码</li>
+<li>管理jar包的依赖</li>
+<li>管理需要的jar版本</li>
+<li>编译程序，java文件编译为class文件</li>
+<li>测试代码是否正确</li>
+<li>打包文档成jar或war文件</li>
+<li>部署项目</li>
+</ul>
+<h1 id="二、构建"><a href="#二、构建" class="headerlink" title="二、构建"></a>二、构建</h1><p>项目的构建是面向过程的：编译、测试、运行、打包、部署等；</p>
+<p>maven支持的构建：</p>
+<pre><code>- 清理；删掉之前的编译
+- 编译：批量编译源代码
+- 测试：可批量执行测试程序代码，同时测试很多功能
+- 报告：生成测试结果报告
+- 打包：把项目中所有的class文件，配置文件等所有资源放到压缩文件中；
+- 安装：把上一步中的jar war文件 安装到本地仓库；
+- 部署：把程序安装好可以执行</code></pre><h1 id="三、Maven核心概念"><a href="#三、Maven核心概念" class="headerlink" title="三、Maven核心概念"></a>三、Maven核心概念</h1><ul>
+<li>POM</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span> 		//maven模型的版本，现在只能是4.0.0</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.e groupId&gt;		//任意字符串；组织ID 一般是唯一的，是公司域名+项目名的倒写</span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>com.mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>//指定项目名字 对应上面id中的项目名</span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span> 	//项目的版本号，如果还在开发，通常在版本后加SNAPSHOT</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p><strong>约定</strong>的目录结构</p>
+</li>
+<li><p>坐标</p>
+<p>  <groupId>   <artifactId>  <version> 总称为坐标（唯一的标识）</version></artifactId></groupId></p>
+</li>
+<li><p>依赖管理</p>
+</li>
+<li><p>仓库管理</p>
+</li>
+</ul>
+<p>仓库：jar包的下载不需要认为操作</p>
+<ul>
+<li><p>存放jar  </p>
+<ul>
+<li>包括maven使用的插件（各种jar包）</li>
+<li>项目使用的jar（第三方工具）</li>
+</ul>
+</li>
+<li><p>分类</p>
+<ul>
+<li>本地仓库</li>
+<li><a href="https://repo.maven.apache.org/maven2/" target="_blank" rel="noopener">中央仓库</a></li>
+<li>中央仓库的镜像</li>
+<li>私服，公司内部的局域网服务器；</li>
+</ul>
+</li>
+<li><p>生命周期</p>
+</li>
+<li><p>插件和目标</p>
+</li>
+<li><p>继承</p>
+</li>
+<li><p>聚合</p>
+</li>
+</ul>
+<h1 id="四、Maven的安装和配置"><a href="#四、Maven的安装和配置" class="headerlink" title="四、Maven的安装和配置"></a>四、Maven的安装和配置</h1><h2 id="4-1-JDK1-8"><a href="#4-1-JDK1-8" class="headerlink" title="4.1 JDK1.8"></a>4.1 JDK1.8</h2><p>安装</p>
+<ul>
+<li><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">下载地址</a></li>
+<li><a href="https://blog.csdn.net/weixin_37601546/article/details/88623530" target="_blank" rel="noopener">安装步骤</a></li>
+<li>注意：安装过程会提示安装jre，无需安装，jdk中已经含有jre </li>
+</ul>
+<p>配置</p>
+<ul>
+<li>Java的环境变量需要配置三个：JAVA_HOME、Path、ClassPath </li>
+<li>JAVA_HOME：它的作用是指向JDK的安装目录，Tomcat、Idea、Eclipse等软件就是通过它来找到并使用安装好的JDK </li>
+<li>Path： 作用是指定命令搜索路径，在执行命令javac或java时，它会到Path变量所指定的路径中查找看是否能找到相应的命令程序。我们需要把JDK安装目录下的bin目录增加到现有的Path变量中，bin目录中包含经常要用到的可执行文件javac、java、javadoc等，设置好Path变量后，就可以在任何目录下执行javac、java等命令</li>
+<li>ClassPath：它的作用是指定类搜索路径，要使用已经编写好的类，前提当然是能够找到它们了，JVM就是通过ClassPath来寻找类的.class文件。我们需要把JDK安装目录下的lib子目录中的dt.jar和tools.jar设置到ClassPath中，当然，当前目录“.”也必须加入到该变量中</li>
+</ul>
+<h2 id="4-2Maven工具的安装和配置"><a href="#4-2Maven工具的安装和配置" class="headerlink" title="4.2Maven工具的安装和配置"></a>4.2Maven工具的安装和配置</h2><ul>
+<li><p><a href="https://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/" target="_blank" rel="noopener">下载地址</a></p>
+</li>
+<li><p>解压安装包</p>
+<ul>
+<li>bin： 执行程序</li>
+<li>conf： maven工具本身的配置文件setting.xml</li>
+</ul>
+</li>
+<li><p>配置环境变量</p>
+<p>​    环境变量中，指定M2_HOME，value为bin之前的目录</p>
+<p>​    path 中加入 %M2_HOME%\bin;</p>
+</li>
+</ul>
+<p>cmd中：mvn -v测试安装。</p>
+<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200603110946585.png" alt="image-20200603110946585"></p>
+<p>本地仓库：C:\Users\Lenovo.m2\repository</p>
+<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200603111529125.png" alt="image-20200603111529125"></p>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200603202025488.png" alt="image-20200603202025488"></p>
+<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200603205448637.png" alt="image-20200603205448637"></p>
+<h1 id="五、Maven在IDEA中的应用"><a href="#五、Maven在IDEA中的应用" class="headerlink" title="五、Maven在IDEA中的应用"></a>五、Maven在IDEA中的应用</h1><h1 id="六、依赖管理"><a href="#六、依赖管理" class="headerlink" title="六、依赖管理"></a>六、依赖管理</h1><h1 id="七、常用设置"><a href="#七、常用设置" class="headerlink" title="七、常用设置"></a>七、常用设置</h1>]]></content>
+      <tags>
+        <tag>Maven</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Landset8图像处理和水体提取</title>
     <url>/2020/06/01/Landset8%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%92%8C%E6%B0%B4%E4%BD%93%E6%8F%90%E5%8F%96/</url>
-    <content><![CDATA[<h2 id="一、图像处理整体思路步骤"><a href="#一、图像处理整体思路步骤" class="headerlink" title="一、图像处理整体思路步骤"></a>一、图像处理整体思路步骤</h2><h3 id="1、多光谱波段"><a href="#1、多光谱波段" class="headerlink" title="1、多光谱波段"></a>1、多光谱波段</h3><p><img data-src="D:/hexo_blog/source/_posts/%E5%AF%BC%E5%85%A5Landset8%E5%BD%B1%E5%83%8F.png" alt="avatar"></p>
-<h4 id="1-1多光谱波段的辐射定标"><a href="#1-1多光谱波段的辐射定标" class="headerlink" title="1.1多光谱波段的辐射定标"></a>1.1多光谱波段的辐射定标</h4><h5 id="1-1-1-Envi导入Landset8影像"><a href="#1-1-1-Envi导入Landset8影像" class="headerlink" title="1.1.1 Envi导入Landset8影像"></a>1.1.1 Envi导入Landset8影像</h5><p><img data-src="D:/hexo_blog/source/_posts/%E5%AF%BC%E5%85%A5Landset8%E5%BD%B1%E5%83%8F.png" alt="avatar"></p>
+    <content><![CDATA[<h2 id="一、图像处理整体思路步骤"><a href="#一、图像处理整体思路步骤" class="headerlink" title="一、图像处理整体思路步骤"></a>一、图像处理整体思路步骤</h2><h3 id="1、多光谱波段"><a href="#1、多光谱波段" class="headerlink" title="1、多光谱波段"></a>1、多光谱波段</h3><p><img data-src="buzhou.jpg" alt="avatar"></p>
+<h4 id="1-1多光谱波段的辐射定标"><a href="#1-1多光谱波段的辐射定标" class="headerlink" title="1.1多光谱波段的辐射定标"></a>1.1多光谱波段的辐射定标</h4><h5 id="1-1-1-Envi导入Landset8影像"><a href="#1-1-1-Envi导入Landset8影像" class="headerlink" title="1.1.1 Envi导入Landset8影像"></a>1.1.1 Envi导入Landset8影像</h5><p><img data-src="%E5%AF%BC%E5%85%A5Landset8%E5%BD%B1%E5%83%8F.png" alt="avatar"></p>
 <hr>
 <p><strong>Landset8波段调整</strong></p>
 <ul>
@@ -794,9 +902,9 @@
 </ul>
 <hr>
 <p><strong>波段组合</strong></p>
-<p><img data-src="D:/hexo_blog/source/_posts/OLI%E6%B3%A2%E6%AE%B5%E7%BB%84%E5%90%88.png" alt="avatar"></p>
-<p><img data-src="D:/hexo_blog/source/_posts/OLI%E6%B3%A2%E6%AE%B5%E7%BB%84%E5%90%88%E8%AF%B4%E6%98%8E.png" alt="avatar"></p>
-<p><img data-src="D:/hexo_blog/source/_posts/OLI%E6%B3%A2%E6%AE%B5%E7%BB%84%E5%90%882.png" alt="avatar"></p>
+<p><img data-src="OLI%E6%B3%A2%E6%AE%B5%E7%BB%84%E5%90%88.png" alt="avatar"></p>
+<p><img data-src="OLI%E6%B3%A2%E6%AE%B5%E7%BB%84%E5%90%88%E8%AF%B4%E6%98%8E.png" alt="avatar"></p>
+<p><img data-src="OLI%E6%B3%A2%E6%AE%B5%E7%BB%84%E5%90%882.png" alt="avatar"></p>
 <hr>
 <p><strong>图像预处理</strong></p>
 <p>由于Landsat数据已经经过几何校正和地形校正，所以<strong>直接进行</strong>辐射定标和大气校正。</p>
@@ -812,7 +920,7 @@
 <p>​        单击FLAASH Settings按钮，自动获取辐射亮度单位转换系数Scale Factor：0.1,其他选项是方便用于</p>
 <p>​                FLAASH大气校正；</p>
 <p>​        最后自行设置输出路径。</p>
-<p><img data-src="D:/hexo_blog/source/_posts/%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE1.jpg" alt="avatar"></p>
+<p><img data-src="%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE1.jpg" alt="avatar"></p>
 <hr>
 <h4 id="1-2多光谱波段的大气校正"><a href="#1-2多光谱波段的大气校正" class="headerlink" title="1.2多光谱波段的大气校正"></a>1.2多光谱波段的大气校正</h4><ul>
 <li>打开Radiometric Correction </li>
@@ -820,7 +928,7 @@
 <li>-&gt; FLAASH Atmospheric Correction工具 </li>
 <li>导入经过辐射定标的数据radiometric_result.dat，因为在辐射定标中已经进行了单位换算，所以在弹出的Radiance Scale Factors中选择第二项 </li>
 </ul>
-<img data-src="D:/hexo_blog/source/_posts/大气校正图片1.png" alt="avatar" style="zoom:50%;">
+<img data-src="大气校正图片1.png" alt="avatar" style="zoom:50%;">
 
 <p>由于FLAASH大气校正需要影像区域的平均高程，所以可以使用ENVI自带全球高程数据进行计算。</p>
 <ul>
@@ -829,27 +937,27 @@
 <li><p>将需要计算高程数据的影像打开（需要带坐标信息），可以放大看到影像数据叠加在DEM数据上</p>
 </li>
 </ul>
-<p>​    <img data-src="D:/hexo_blog/source/_posts/大气校正图片2.png" alt="avatar" style="zoom:67%;"></p>
+<p>​    <img data-src="大气校正图片2.png" alt="avatar" style="zoom:67%;"></p>
 <ul>
 <li>打开工具箱中的Statistics——Compute Statistics,在输入文件对话框中选择GMTED2010.jp2数据，再单击Stats Subset，单击File，选择需要统计高程信息对应的图像，然后OK.</li>
 </ul>
-<p>​    <img data-src="D:/hexo_blog/source/_posts/大气校正图片3.png" alt="avatar" style="zoom: 67%;"></p>
+<p>​    <img data-src="大气校正图片3.png" alt="avatar" style="zoom: 67%;"></p>
 <ul>
 <li>之后的参数均设置为默认。最后得到统计的平均高程信息，可以看到影像平均高程为256.626m（下图）</li>
 </ul>
-<p>​        <img data-src="D:/hexo_blog/source/_posts/大气校正图片4.png" alt="avatar" style="zoom:67%;"></p>
+<p>​        <img data-src="大气校正图片4.png" alt="avatar" style="zoom:67%;"></p>
 <ul>
 <li>随后回到FLAASH工具，设置其他参数。传感器类型Sensor Type为Landsat-8 OLI，平均地面高程Ground Elevation为0.256km，大气模型根据帮助文档中的<strong>大气模型表</strong>进行选择，根据影像成像时间为3月，影像中心纬度为34°确定大气模型为MLS。气溶胶模型选择城市Urban。</li>
 </ul>
-<p>​            <img data-src="D:/hexo_blog/source/_posts/大气校正图片5.png" alt="avatar" style="zoom: 67%;"></p>
+<p>​            <img data-src="大气校正图片5.png" alt="avatar" style="zoom: 67%;"></p>
 <ul>
 <li>设置的FLAASH参数、</li>
 </ul>
-<p>​        <img data-src="D:/hexo_blog/source/_posts/%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3%E5%9B%BE%E7%89%876.png" alt="avatar"></p>
+<p>​        <img data-src="%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3%E5%9B%BE%E7%89%876.png" alt="avatar"></p>
 <ul>
 <li>同时还要设置多光谱参数，进入Multispectral Settings，将Default设置为Over-Land Retrieval Standard(600：2100)</li>
 </ul>
-<p>​    <img data-src="D:/hexo_blog/source/_posts/大气校正图片7.png" alt="avatar" style="zoom:67%;"></p>
+<p>​    <img data-src="大气校正图片7.png" alt="avatar" style="zoom:67%;"></p>
 <ul>
 <li>其他参数按照默认设置，最后点击Apply进行大气校正。大气校正结果如图11所示，会显示估算能见度和平均水汽柱。</li>
 </ul>
@@ -857,7 +965,7 @@
 <ul>
 <li>FLAASH大气校正结果</li>
 </ul>
-<p>​        <img data-src="D:/hexo_blog/source/_posts/%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3%E5%9B%BE%E7%89%878.png" alt="avatar"></p>
+<p>​        <img data-src="%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3%E5%9B%BE%E7%89%878.png" alt="avatar"></p>
 <hr>
 <h3 id="2、全色波段"><a href="#2、全色波段" class="headerlink" title="2、全色波段"></a>2、全色波段</h3><h4 id="2-1全色波段的辐射定标"><a href="#2-1全色波段的辐射定标" class="headerlink" title="2.1全色波段的辐射定标"></a>2.1全色波段的辐射定标</h4><ul>
 <li><p>选择ToolBox/Radiometric Correction/Radiometric Calibration，选择全色波段（Panchromatic）；</p>
@@ -870,7 +978,7 @@
 </ul>
 </li>
 </ul>
-<p><img data-src="D:/hexo_blog/source/_posts/%E5%85%A8%E8%89%B2%E6%B3%A2%E6%AE%B5%E5%9B%BE%E7%89%871.png" alt="avatar"></p>
+<p><img data-src="%E5%85%A8%E8%89%B2%E6%B3%A2%E6%AE%B5%E5%9B%BE%E7%89%871.png" alt="avatar"></p>
 <ul>
 <li>点击OK输出</li>
 </ul>
@@ -887,11 +995,52 @@
 </ul>
 </li>
 </ul>
-<p><img data-src="D:/hexo_blog/source/_posts/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E5%9B%BE%E7%89%871.png" alt="avatar"></p>
+<p><img data-src="%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88%E5%9B%BE%E7%89%871.png" alt="avatar"></p>
 <hr>
 <h2 id="二、水体信息提取"><a href="#二、水体信息提取" class="headerlink" title="二、水体信息提取"></a>二、水体信息提取</h2>]]></content>
       <tags>
         <tag>NDWI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo博客搭建</title>
+    <url>/2020/06/01/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<p> — #安装Nodejs<br>node -v #查看node版本<br>npm -v #查看npm版本<br>npm install -g cnpm –registry=<a href="http://registry.npm.taobao.org" target="_blank" rel="noopener">http://registry.npm.taobao.org</a> #安装淘宝的cnpm 管理器<br>cnpm -v #查看cnpm版本<br>cnpm install -g hexo-cli #安装hexo框架<br>hexo -v #查看hexo版本<br>mkdir blog #创建blog目录<br>cd blog #进入blog目录<br>hexo init #生成博客 初始化博客</p>
+<p> <img data-src="image-20200516170333761.png" alt="avatar"></p>
+<p>hexo s #启动本地博客服务</p>
+<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516170405967.png" alt="image-20200516170405967"></p>
+<p>本地启动用来预览</p>
+<p><a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> #本地访问地址</p>
+<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516170447241.png" alt="image-20200516170447241"></p>
+<p>hexo n “我的第一篇文章” #创建新的文章</p>
+<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516170732433.png" alt="image-20200516170732433">\</p>
+<p>chdir#返回blog目录</p>
+<p>hexo clean #清理<br>hexo g #生成<br>#Github创建一个新的仓库 YourGithubName.github.io<br>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件<br>-—<br>#配置_config.yml<br>-—-<br># Deployment<br>## Docs: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">https://hexo.io/docs/deployment.html</a><br>deploy:<br>type: git<br>repo: <a href="https://github.com/YourGithubName/YourGithubName.github.io.git" target="_blank" rel="noopener">https://github.com/YourGithubName/YourGithubName.github.io.git</a><br>branch: master<br>-—-<br>hexo d #部署到Github仓库里</p>
+<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516184925677.png" alt="image-20200516184925677"></p>
+<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516184942258.png" alt="image-20200516184942258"></p>
+<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516184955781.png" alt="image-20200516184955781"></p>
+<p><a href="https://YourGithubName.github.io/" target="_blank" rel="noopener">https://YourGithubName.github.io/</a> #访问这个地址可以查看博客</p>
+<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516185138387.png" alt="image-20200516185138387"></p>
+<p>换主题</p>
+<p>git clone <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia #下载yilia主题到本地</p>
+<p>#修改hexo根目录下的 _config.yml 文件 ： theme: yilia</p>
+<p>hexo c #清理一下<br>hexo g #生成<br>hexo d #部署到远程Github仓库<br><a href="https://YourGithubName.github.io/" target="_blank" rel="noopener">https://YourGithubName.github.io/</a> #查看博客 </p>
+<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516165127207.png" alt="image-20200516165127207"></p>
+<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516165334247.png" alt="image-20200516165334247"></p>
+<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516165325307.png" alt="image-20200516165325307"></p>
+<h1 id="设置个人域名"><a href="#设置个人域名" class="headerlink" title="设置个人域名"></a>设置个人域名</h1><p>现在你的个人网站的地址是 yourname.github.io，如果觉得这个网址逼格不太够，这就需要你设置个人域名了。但是需要花钱。</p>
+<p>注册一个阿里云账户,在阿里云上买一个域名，我买的是 fangzh.top，各个后缀的价格不太一样，比如最广泛的.com就比较贵，看个人喜好咯。</p>
+<p>你需要先去进行实名认证,然后在域名控制台中，看到你购买的域名。<br>————————————————<br>版权声明：本文为CSDN博主「zjufangzh」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/sinat_37781304/java/article/details/82729029" target="_blank" rel="noopener">https://blog.csdn.net/sinat_37781304/java/article/details/82729029</a></p>
+<p>hext 基本配置</p>
+<p> 在文件根目录下的<code>_config.yml</code>，就是整个hexo框架的配置文件了。可以在里面修改大部分的配置。详细可参考<a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">官方的配置</a>描述 </p>
+<p> <a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a> </p>
+<hr>
+<p>更改主题</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;Sitoi&#x2F;Sitoi-blog.git themes&#x2F;文件名</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>hexo nexT</tag>
       </tags>
   </entry>
   <entry>
@@ -1056,44 +1205,38 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo博客搭建</title>
-    <url>/2020/06/01/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<p> — #安装Nodejs<br>node -v #查看node版本<br>npm -v #查看npm版本<br>npm install -g cnpm –registry=<a href="http://registry.npm.taobao.org" target="_blank" rel="noopener">http://registry.npm.taobao.org</a> #安装淘宝的cnpm 管理器<br>cnpm -v #查看cnpm版本<br>cnpm install -g hexo-cli #安装hexo框架<br>hexo -v #查看hexo版本<br>mkdir blog #创建blog目录<br>cd blog #进入blog目录<br>hexo init #生成博客 初始化博客</p>
-<p> <img data-src="image-20200516170333761.png" alt="avatar"></p>
-<p>hexo s #启动本地博客服务</p>
-<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516170405967.png" alt="image-20200516170405967"></p>
-<p>本地启动用来预览</p>
-<p><a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> #本地访问地址</p>
-<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516170447241.png" alt="image-20200516170447241"></p>
-<p>hexo n “我的第一篇文章” #创建新的文章</p>
-<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516170732433.png" alt="image-20200516170732433">\</p>
-<p>chdir#返回blog目录</p>
-<p>hexo clean #清理<br>hexo g #生成<br>#Github创建一个新的仓库 YourGithubName.github.io<br>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件<br>-—<br>#配置_config.yml<br>-—-<br># Deployment<br>## Docs: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">https://hexo.io/docs/deployment.html</a><br>deploy:<br>type: git<br>repo: <a href="https://github.com/YourGithubName/YourGithubName.github.io.git" target="_blank" rel="noopener">https://github.com/YourGithubName/YourGithubName.github.io.git</a><br>branch: master<br>-—-<br>hexo d #部署到Github仓库里</p>
-<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516184925677.png" alt="image-20200516184925677"></p>
-<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516184942258.png" alt="image-20200516184942258"></p>
-<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516184955781.png" alt="image-20200516184955781"></p>
-<p><a href="https://YourGithubName.github.io/" target="_blank" rel="noopener">https://YourGithubName.github.io/</a> #访问这个地址可以查看博客</p>
-<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516185138387.png" alt="image-20200516185138387"></p>
-<p>换主题</p>
-<p>git clone <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia #下载yilia主题到本地</p>
-<p>#修改hexo根目录下的 _config.yml 文件 ： theme: yilia</p>
-<p>hexo c #清理一下<br>hexo g #生成<br>hexo d #部署到远程Github仓库<br><a href="https://YourGithubName.github.io/" target="_blank" rel="noopener">https://YourGithubName.github.io/</a> #查看博客 </p>
-<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516165127207.png" alt="image-20200516165127207"></p>
-<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516165334247.png" alt="image-20200516165334247"></p>
-<p><img data-src="D:%5Chexo_blog%5Csource_posts%5Chexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%5Cimage-20200516165325307.png" alt="image-20200516165325307"></p>
-<h1 id="设置个人域名"><a href="#设置个人域名" class="headerlink" title="设置个人域名"></a>设置个人域名</h1><p>现在你的个人网站的地址是 yourname.github.io，如果觉得这个网址逼格不太够，这就需要你设置个人域名了。但是需要花钱。</p>
-<p>注册一个阿里云账户,在阿里云上买一个域名，我买的是 fangzh.top，各个后缀的价格不太一样，比如最广泛的.com就比较贵，看个人喜好咯。</p>
-<p>你需要先去进行实名认证,然后在域名控制台中，看到你购买的域名。<br>————————————————<br>版权声明：本文为CSDN博主「zjufangzh」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/sinat_37781304/java/article/details/82729029" target="_blank" rel="noopener">https://blog.csdn.net/sinat_37781304/java/article/details/82729029</a></p>
-<p>hext 基本配置</p>
-<p> 在文件根目录下的<code>_config.yml</code>，就是整个hexo框架的配置文件了。可以在里面修改大部分的配置。详细可参考<a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">官方的配置</a>描述 </p>
-<p> <a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a> </p>
-<hr>
-<p>更改主题</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;Sitoi&#x2F;Sitoi-blog.git themes&#x2F;文件名</span><br></pre></td></tr></table></figure>
+    <title>Mybatis学习笔记一</title>
+    <url>/2020/06/01/Mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</url>
+    <content><![CDATA[<h1 id="一、Mybatis环境和知识储备前提"><a href="#一、Mybatis环境和知识储备前提" class="headerlink" title="一、Mybatis环境和知识储备前提"></a>一、Mybatis环境和知识储备前提</h1><ul>
+<li>JDK1.8</li>
+<li>Mysql 5.7</li>
+<li>maven3.6.1</li>
+<li>IDEA<ul>
+<li>JDBC</li>
+<li>Mysql</li>
+<li>Java基础</li>
+<li>Maven</li>
+<li>Junit</li>
+</ul>
+</li>
+</ul>
+<h1 id="二、简介"><a href="#二、简介" class="headerlink" title="二、简介"></a>二、简介</h1><p><a href="https://mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">中文文档</a></p>
+<p><a href="https://github.com/mybatis/mybatis-3/" target="_blank" rel="noopener">Github</a></p>
+<p><a href="https://mvnrepository.com/" target="_blank" rel="noopener">maven中央仓库</a></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.mybatis/mabits --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p> MyBatis 是一款优秀的<strong>持久层框架</strong> ,</p>
+<ul>
+<li><p>数据持久化：将程序的数据在持久状态（数据库jdbc、IO）和瞬时状态（内存）转化的过程</p>
+</li>
+<li><p>持久层：完成持久化工作的代码块</p>
+</li>
+</ul>
+<h1 id="三、第一个Mybatis程序"><a href="#三、第一个Mybatis程序" class="headerlink" title="三、第一个Mybatis程序"></a>三、第一个Mybatis程序</h1><p>思路：搭建环境-&gt;导入mybatis-&gt;编写代码-&gt;测试</p>
+<h2 id="3-1搭建环境"><a href="#3-1搭建环境" class="headerlink" title="3.1搭建环境"></a>3.1搭建环境</h2><h3 id="3-1-1搭建数据库"><a href="#3-1-1搭建数据库" class="headerlink" title="3.1.1搭建数据库"></a>3.1.1搭建数据库</h3><p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200602125129140.png" alt="image-20200602125129140"></p>
 ]]></content>
       <tags>
-        <tag>hexo nexT</tag>
+        <tag>Mybatis Mysql</tag>
       </tags>
   </entry>
 </search>
