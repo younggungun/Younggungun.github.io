@@ -20,18 +20,20 @@
     var CONFIG = {"hostname":"younggungun.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hec-Ras">
-<meta property="og:url" content="http://younggungun.com/tags/index.html">
+  <meta name="description" content="PCA原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PCA的数学原理">
+<meta property="og:url" content="http://younggungun.com/2020/07/02/PCA%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="大羊的一天">
+<meta property="og:description" content="PCA原理">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-31T14:19:05.000Z">
-<meta property="article:modified_time" content="2020-05-31T14:21:07.849Z">
+<meta property="article:published_time" content="2020-07-02T02:58:02.000Z">
+<meta property="article:modified_time" content="2020-07-02T03:02:06.212Z">
 <meta property="article:author" content="Da Young">
-<meta property="article:tag" content="Java Hec-ras">
+<meta property="article:tag" content="PCA、降维、矩阵变换">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://younggungun.com/tags/">
+<link rel="canonical" href="http://younggungun.com/2020/07/02/PCA%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/">
 
 
 <script id="page-configurations">
@@ -39,13 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Hec-Ras | 大羊的一天
-</title>
+  <title>PCA的数学原理 | 大羊的一天</title>
   
 
 
@@ -177,51 +178,116 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">Hec-Ras
-</h1>
-
-<div class="post-meta">
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://younggungun.com/2020/07/02/PCA%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+      <meta itemprop="name" content="Da Young">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大羊的一天">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PCA的数学原理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-02 10:58:02 / 修改时间：11:02:06" itemprop="dateCreated datePublished" datetime="2020-07-02T10:58:02+08:00">2020-07-02</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>PCA原理</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Da Young 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
 </div>
 
-</header>
 
-      
-      
-      
-      <div class="post-body">
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-              目前共计 8 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/Dijkstra%E7%AE%97%E6%B3%95%EF%BC%8CFloyd%E7%AE%97%E6%B3%95/" style="font-size: 12px; color: #ccc">Dijkstra算法，Floyd算法</a> <a href="/tags/Java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 12px; color: #ccc">Java数据结构与算法</a> <a href="/tags/Maven/" style="font-size: 12px; color: #ccc">Maven</a> <a href="/tags/Mybatis-Mysql/" style="font-size: 12px; color: #ccc">Mybatis Mysql</a> <a href="/tags/NDWI/" style="font-size: 12px; color: #ccc">NDWI</a> <a href="/tags/PCA%E3%80%81%E9%99%8D%E7%BB%B4%E3%80%81%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/" style="font-size: 12px; color: #ccc">PCA、降维、矩阵变换</a> <a href="/tags/hexo-nexT/" style="font-size: 30px; color: #111">hexo nexT</a> <a href="/tags/%E2%80%9Ctags%E2%80%9D/" style="font-size: 12px; color: #ccc">“tags”</a>
-            </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PCA%E3%80%81%E9%99%8D%E7%BB%B4%E3%80%81%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/" rel="tag"># PCA、降维、矩阵变换</a>
           </div>
-        
-      </div>
-      
-      
-      
-    </div>
-    
 
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/25/OSM%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%A4%84%E7%90%86/" rel="prev" title="OSM数据下载和处理">
+      <i class="fa fa-chevron-left"></i> OSM数据下载和处理
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
     
-    
-    
+  </article>
+  
+  
+  
+
 
 
           </div>
