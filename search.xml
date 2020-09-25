@@ -1313,6 +1313,8 @@
     <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public boolean equals(Object obj) &#123;</span><br><span class="line">    return (this &#x3D;&#x3D; obj);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <p>由equals的源码可以看出这里定义的equals与==是等效的；不同的原因就在于有些类（像String、Integer、Date等类）对equals进行了重写。</p>
+<a id="more"></a>
+
 <h3 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h3><ul>
 <li>基本数据类型：没有equal方法；</li>
 <li>引用数据类型：因为String，八种基本数据类型的包装类都覆写了equals方法，因此equals比较的是内容；其他引用数据类型如果没有覆写equals方法，则判断是否指向同一个引用。</li>
@@ -1326,6 +1328,9 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">        <span class="comment">//String s="abce"是一种非常特殊的形式,和new 有本质的区别。</span></span><br><span class="line">        String str0 = <span class="string">"Hello"</span>;	<span class="comment">// 放在常量池中</span></span><br><span class="line">        String str1 = <span class="string">"Hello"</span>;	<span class="comment">// 从常量池中查找</span></span><br><span class="line">        String str2 = <span class="keyword">new</span> String(<span class="string">"Hello"</span>);</span><br><span class="line">        String str3 = str2; <span class="comment">// 引用传递</span></span><br><span class="line">        System.out.println(str1 == str2); <span class="comment">// false</span></span><br><span class="line">        System.out.println(str1 == str3); <span class="comment">// false</span></span><br><span class="line">        System.out.println(str2 == str3); <span class="comment">// true</span></span><br><span class="line">        System.out.println(str1.equals(str2)); <span class="comment">// true</span></span><br><span class="line">        System.out.println(str1.equals(str3)); <span class="comment">// true</span></span><br><span class="line">        System.out.println(str2.equals(str3)); <span class="comment">// true</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//基本数据类型："=="&gt;&gt;比较值</span></span><br><span class="line">        <span class="keyword">int</span> a1=<span class="number">1</span>;<span class="keyword">double</span> b1=<span class="number">1.0</span>;</span><br><span class="line">        System.out.println(a1==b1);       <span class="comment">//true值相等</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//包装类</span></span><br><span class="line">        ？？？？</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
+      <tags>
+        <tag>equals和&quot;==&quot;的对比</tag>
+      </tags>
   </entry>
   <entry>
     <title>hexo博客搭建</title>
