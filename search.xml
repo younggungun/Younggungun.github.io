@@ -546,7 +546,7 @@
 <li><strong>饿汉式</strong>是立即加载的方式，无论是否会用到这个对象，都会加载。<br>如果在构造方法里写了性能消耗较大，占时较久的代码，比如建立与数据库的连接，那么就会在启动的时候感觉稍微有些卡顿。 </li>
 <li><strong>懒汉式</strong>，是延迟加载的方式，只有使用的时候才会加载。 并且有<a href="https://how2j.cn/k/thread/thread-synchronized/355.html#step793" target="_blank" rel="noopener">线程安全</a>的考量(鉴于同学们学习的进度，暂时不对线程的章节做展开)。<br>使用懒汉式，在启动的时候，会感觉到比饿汉式略快，因为并没有做对象的实例化。 但是在第一次调用的时候，会进行实例化操作，感觉上就略慢。</li>
 </ul>
-<h4 id="2-4面向对象的三大特征"><a href="#2-4面向对象的三大特征" class="headerlink" title="2.4面向对象的三大特征"></a>2.4面向对象的三大特征</h4><h5 id="2-4-1封装"><a href="#2-4-1封装" class="headerlink" title="2.4.1封装"></a>2.4.1封装</h5><ul>
+<h4 id="2-4-面向对象的三大特征"><a href="#2-4-面向对象的三大特征" class="headerlink" title="2.4  面向对象的三大特征"></a>2.4  面向对象的三大特征</h4><h5 id="2-4-1封装"><a href="#2-4-1封装" class="headerlink" title="2.4.1封装"></a>2.4.1封装</h5><ul>
 <li><p>private；getXxx;  setXxx;</p>
 </li>
 <li><p>boolean: <strong>setBool; isBool;</strong></p>
@@ -560,12 +560,14 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*访问成员</span></span><br><span class="line"><span class="comment">this.成员变量 ‐‐ 本类的 </span></span><br><span class="line"><span class="comment">super.成员变量 ‐‐ 父类的 </span></span><br><span class="line"><span class="comment">this.成员方法名() ‐‐ 本类的 </span></span><br><span class="line"><span class="comment">super.成员方法名() ‐‐ 父类的*/</span></span><br><span class="line"><span class="comment">//-----------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">/*访问构造方法</span></span><br><span class="line"><span class="comment">this(...) ‐‐ 本类的构造方法 </span></span><br><span class="line"><span class="comment">super(...) ‐‐ 父类的构造方法</span></span><br><span class="line"><span class="comment">子类的每个构造方法中均有默认的super()，调用父类的空参构造。手动调用父类构造会覆盖默认的super()。</span></span><br><span class="line"><span class="comment">super() 和 this() 都必须是在构造方法的第一行，所以不能同时出现。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> demo1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hero</span> </span>&#123;</span><br><span class="line">        String name; <span class="comment">//姓名</span></span><br><span class="line">        <span class="keyword">float</span> hp; <span class="comment">//血量</span></span><br><span class="line">        <span class="keyword">float</span> armor; <span class="comment">//护甲</span></span><br><span class="line">        <span class="keyword">int</span> moveSpeed; <span class="comment">//移动速度</span></span><br><span class="line">        <span class="comment">//带一个参数的构造方法</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Hero</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"一个参数的构造方法"</span>);</span><br><span class="line">            <span class="keyword">this</span>.name = name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//带两个参数的构造方法</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Hero</span><span class="params">(String name,<span class="keyword">float</span> hp)</span></span>&#123;</span><br><span class="line">            <span class="keyword">this</span>(name);</span><br><span class="line">            System.out.println(<span class="string">"两个参数的构造方法"</span>);</span><br><span class="line">            <span class="keyword">this</span>.hp = hp;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Hero</span><span class="params">(String name,<span class="keyword">float</span> hp,<span class="keyword">int</span> V)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(name,hp);</span><br><span class="line">        System.out.println(<span class="string">"3个参数的构造方法"</span>);</span><br><span class="line">        moveSpeed = V;</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">            Hero teemo =  <span class="keyword">new</span> Hero(<span class="string">"提莫"</span>,<span class="number">383</span>,<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">            System.out.println(teemo.name+teemo.hp+teemo.moveSpeed);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<h5 id="static的用法"><a href="#static的用法" class="headerlink" title="static的用法"></a>static的用法</h5><ul>
+<h6 id="static的用法"><a href="#static的用法" class="headerlink" title="static的用法"></a>static的用法</h6><ul>
 <li><p>修饰成员变量</p>
-<p>在类加载时加载并初始化；存在于方法区中；</p>
-<p>在访问时： 静态不能访问非静态 , 非静态可以访问静态 !</p>
+<p>在类加载时加载并初始化；==存在于方法区中==；</p>
 </li>
 <li><p>成员方法</p>
+<ul>
+<li>static方法只能调用static属性和static方法；非static方法允许调用static属性和static方法；</li>
+</ul>
 </li>
 <li><p>静态代码块（见代码快） </p>
 </li>
@@ -584,54 +586,207 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">类</td>
+<td align="center">同一类中</td>
 <td align="center">√</td>
 <td align="center">√</td>
 <td align="center">√</td>
 <td align="center">√</td>
 </tr>
 <tr>
-<td align="center">包</td>
+<td align="center">同一包中(子类与无关类)</td>
 <td align="center"></td>
 <td align="center">√</td>
 <td align="center">√</td>
 <td align="center">√</td>
 </tr>
 <tr>
-<td align="center">子类</td>
+<td align="center">不同包的子类</td>
 <td align="center"></td>
 <td align="center"></td>
 <td align="center">√</td>
 <td align="center">√</td>
 </tr>
 <tr>
-<td align="center">其他包</td>
+<td align="center">不同包中的无关类</td>
 <td align="center"></td>
 <td align="center"></td>
 <td align="center"></td>
 <td align="center">√</td>
 </tr>
 </tbody></table>
-<h5 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h5><ul>
-<li><p><strong>普通代码块：</strong>类中方法的方法体</p>
-</li>
-<li><p><strong>构造代码块</strong>：类中<strong>{}</strong>直接括起来的语句，每次创建对象都会被调用，先于构造方法执行；</p>
-</li>
-<li><p><strong>静态代码块</strong>：随着类加载（类第一次使用），类中<strong>static{}</strong>括起来的语句，<strong>只执行一次</strong>（因为类只加载一次），==先于构造代码块执行==；</p>
-</li>
-<li><p><strong>同步代码块：</strong>类中synchronized（）{}括起来的语句，多线程环境下互斥执行</p>
-<blockquote>
-<p>执行循序：静态代码块&gt;&gt;构造代码块&gt;&gt;构造方法</p>
+<ul>
+<li><blockquote>
 </blockquote>
 </li>
 </ul>
-<h5 id="2-4-2-继承-后面章节"><a href="#2-4-2-继承-后面章节" class="headerlink" title="2.4.2 继承(后面章节)"></a>2.4.2 继承(后面章节)</h5><h5 id="2-4-3-多态"><a href="#2-4-3-多态" class="headerlink" title="2.4.3 多态"></a>2.4.3 多态</h5><p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200512152436149.png" alt="image-20200512152436149"></p>
+<h5 id="2-4-2-继承"><a href="#2-4-2-继承" class="headerlink" title="2.4.2 继承"></a>2.4.2 继承</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 父类</span>&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 子类 <span class="keyword">extends</span> 父类 </span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//成员变量</span></span><br><span class="line"><span class="comment">//子类的方法可以用父类的非私有变量；若重名，super.父类变量,this.子类变量</span></span><br><span class="line"><span class="comment">//父类中的私有变量若进行访问，照样getXxx,setXxx;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//成员方法</span></span><br><span class="line"><span class="comment">//不重名，调用时现在子类找，若无再在父类找</span></span><br><span class="line"><span class="comment">//重名(返回类型、方法名、参数列表相同)-&gt;&gt;方法重写-&gt;&gt;只执行重写后的方法</span></span><br><span class="line"><span class="comment">//子类方法覆盖父类方法，必须要保证权限大于等于父类权限。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>子类可以==直接==访问父类中的==非私有==的属性和行为。通过get set方法访问私有成员。</p>
+</li>
+<li><p><strong>成员变量重名</strong></p>
+<ul>
+<li>重名且没有super this关键字修饰时，成员变量就近原则；</li>
+<li>子父类中出现了同名的成员变量时，在子类中需要访问父类中非私有成员变量时，需要使用 super 关键字，修饰<br>父类成员变量</li>
+</ul>
+</li>
+<li><p>成员方法重名——重写(Override)</p>
+<ul>
+<li>重写是对父类方法对扩展</li>
+<li>重写的规则<ul>
+<li>参数列表必须与被重写方法相同；</li>
+<li>返回类型必须与被重写方法的返回类型相同；</li>
+<li>访问权限不得低于父类被重写方法；</li>
+<li>只能被子类重写</li>
+<li>被final修饰的方法，不能被重写（但其所在的类可以有子类，不过final方法不能被重写。</li>
+<li>声明static和private的方法不能被重写，但能够被再次声明。</li>
+<li>子类方法的返回值必须【小于等于】父类方法的返回值范围。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showNum</span><span class="params">()</span></span>&#123;     </span><br><span class="line">	System.out.println(<span class="string">"来电显示号码"</span>);         </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewPhone</span> <span class="keyword">extends</span> <span class="title">Phone</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showNum</span><span class="params">()</span></span>&#123;     </span><br><span class="line">	<span class="comment">//用到super.父类成员方法，表示在父类的成员方法基础上完善。  		 额外注意次用法！！！       </span></span><br><span class="line">	<span class="keyword">super</span>.showNum();         </span><br><span class="line">	<span class="comment">//增加自己特有显示姓名和图片功能         </span></span><br><span class="line">	System.out.println(<span class="string">"显示来电姓名"</span>);         </span><br><span class="line">	System.out.println(<span class="string">"显示头像"</span>);         </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构造方法</p>
+<ul>
+<li><p>子类是无法继承父类构造方法的。因为构造方法需要与类名一致。</p>
+<p>子类的构造函数一定会先执行父类中的构造函数；</p>
+</li>
+<li><p>子类的构造方法中<strong>默认有一个 super()</strong>，调用父类的构造方法，<strong>父类成员变量初始化后</strong>，才可以给子类使用。</p>
+</li>
+</ul>
+</li>
+<li><p>父类空间优先于子类对象产生</p>
+</li>
+<li><p>super和this</p>
+<p>​    如果父类没有无参构造，则子类有super（）的地方会报错。；</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.成员变量     ‐‐    本类的    </span><br><span class="line"><span class="keyword">super</span>.成员变量     ‐‐    父类的   </span><br><span class="line">   </span><br><span class="line"><span class="keyword">this</span>.成员方法名()   ‐‐    本类的       </span><br><span class="line"><span class="keyword">super</span>.成员方法名()   ‐‐    父类的</span><br><span class="line">      </span><br><span class="line"><span class="keyword">this</span>(...)     ‐‐    本类的构造方法    </span><br><span class="line"><span class="keyword">super</span>(...)    ‐‐    父类的构造方法</span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Fu</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> n;</span><br><span class="line">    Fu()&#123;</span><br><span class="line">    System.out.println(<span class="string">"Fu()"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">    String sex;</span><br><span class="line">    Zi()&#123;</span><br><span class="line">        <span class="keyword">super</span>();						<span class="comment">//还可以利用super(...)调用父类构造重载的方法；</span></span><br><span class="line">        System.out.println(<span class="string">"ziwucan"</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    Zi(String sex)&#123;</span><br><span class="line">        <span class="keyword">this</span>();							<span class="comment">//调用上面的无参构造Zi()&#123;...&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Zi z=<span class="keyword">new</span> Zi(<span class="string">"m"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//super() 和 this() 都必须是在&lt;构造方法&gt;的第一行，所以不能同时出现。</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<hr>
+<h6 id="final关键字的使用"><a href="#final关键字的使用" class="headerlink" title="final关键字的使用"></a>final关键字的使用</h6><ul>
+<li><p>类（太监类）：被修饰的类，不能被继承。</p>
+</li>
+<li><p>方法：被修饰的方法，不能被重写。但该方法所属的类可有子类；</p>
+</li>
+<li><p>变量</p>
+<ul>
+<li><p>基本类型的局部变量：被修饰的变量，只能赋值一次，不能被重新赋值。</p>
+</li>
+<li><p>引用类型的局部变量：被final修饰后，只能指向一个对象，地址不能再更改。但是，对象中的<strong>属性可以改变</strong>。</p>
+</li>
+<li><p>成员变量，</p>
+<ul>
+<li><p>一旦使用final关键字，一样不能改。</p>
+</li>
+<li><p>和局部变量的不同点在于：成员变量有默认值，因此必须手动赋值。</p>
+</li>
+<li><p>如果没有直接赋值，那就必须保证所有重载的构造方法最终都会对final的成员变量进行了赋值。</p>
+</li>
+<li><p>赋值（初始化）方式有两种，只能二选一：</p>
+<p>1、显示初始化；</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> String USERNAME = <span class="string">"张三"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        2、构造方法初始化。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> String USERNAME ;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(String username, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.USERNAME = username;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>==对于类和方法 abstract和final 矛盾 不能同时使用==；全局变量：public static final…</li>
+<li>被final修饰的常量名称，一般都有书写规范，所有字母都大写</li>
+</ul>
+<p>3局部内部类和匿名内部类中，内部类调用了外部类的变量，则外部类的变量默认编译为final修饰的常量，且final关键字可以省略。</p>
+<h5 id="2-4-3-多态"><a href="#2-4-3-多态" class="headerlink" title="2.4.3 多态"></a>2.4.3 多态</h5><ul>
+<li>继承-&gt;&gt;方法重写-&gt;&gt;父类引用指向子类对象；</li>
+<li>此外，接口的实现也可以多态</li>
+<li>多态是方法的多态，不是属性的多态，与属性无关。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"叫一声"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">ani</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"animal"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"喵~"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">cat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"cat"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Animal a=<span class="keyword">new</span> Cat();</span><br><span class="line">        a.shout();   <span class="comment">//a自动向上转型 对于其他方法只能调用a内的，而重写方法调用=号右侧对象的方法</span></span><br><span class="line">        a.ani();		<span class="comment">//向下转型需要强转；</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//喵~</span></span><br><span class="line"><span class="comment">//animal</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"叫一声"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"汪汪汪~"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"喵~"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Animal a=<span class="keyword">new</span> Animal();			<span class="comment">// 重写的继承方法：根据等号对象判断</span></span><br><span class="line">        jiao(a);						<span class="comment">//非继承，类自有方法，根据引用类型判断</span></span><br><span class="line">        </span><br><span class="line">        								<span class="comment">//类型转换,调用特有方法</span></span><br><span class="line">        </span><br><span class="line">        Dog d =<span class="keyword">new</span> Dog();				<span class="comment">//向下强制数据类型转型：必须有继承关系，不然报错</span></span><br><span class="line">        jiao(d);						<span class="comment">//向下转型可以用instanceof判断</span></span><br><span class="line">        </span><br><span class="line">        Cat c=<span class="keyword">new</span> Cat();</span><br><span class="line">        jiao(c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">jiao</span><span class="params">(Animal b)</span></span>&#123;					<span class="comment">//父类引用指向子类对象；</span></span><br><span class="line">        b.shout();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123; <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123; </span><br><span class="line">    <span class="comment">// 向上转型 </span></span><br><span class="line">    Animal a = <span class="keyword">new</span> Cat(); </span><br><span class="line">    a.eat(); <span class="comment">// 调用的是 Cat 的 eat </span></span><br><span class="line">    <span class="comment">// 向下转型 </span></span><br><span class="line">    <span class="keyword">if</span> (a <span class="keyword">instanceof</span> Cat)&#123; </span><br><span class="line">        Cat c = (Cat)a; </span><br><span class="line">        c.catchMouse(); <span class="comment">// 调用的是 Cat 的 catchMouse </span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a <span class="keyword">instanceof</span> Dog)&#123; </span><br><span class="line">        Dog d = (Dog)a; </span><br><span class="line">        d.watchHouse(); <span class="comment">// 调用的是 Dog 的 watchHouse </span></span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line">                  &#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<h6 id="2-4-3-2对象的转型"><a href="#2-4-3-2对象的转型" class="headerlink" title="2.4.3.2对象的转型"></a>2.4.3.2对象的转型</h6><p>**</p>
+
+
 <hr>
+<h4 id="2-5-抽象"><a href="#2-5-抽象" class="headerlink" title="2.5 抽象"></a>2.5 抽象</h4><ul>
+<li>如果一个类包含抽象方法，那么该类必须是抽象类。</li>
+<li>继承抽象类的子类<strong>必须重写父类所有的抽象方法</strong>。否则，该子类也必须声明为抽象类。</li>
+<li>不能直接进行实例化操作，需要实现类去创建。</li>
+<li>对于类和方法 abstract和final 矛盾不能同时使用。</li>
+<li><strong>抽象类</strong>【可以有】构造方法（继承时，先实现父类的构造方法…）==因此开发者不能通过new创建抽象类的对象，但jvm可以以某种方式生成抽象类实现的部分供子类使用。==</li>
+<li>抽象类必须用public或procted 修饰(如果为private修饰，那么子类则无法继承，也就无法实现其抽象方法）。<strong>默认缺省为 public</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//包含抽象方法的为抽象类&gt;&gt;抽象类可以有非抽象成员方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span>&#123;	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;&#125;;<span class="comment">//非抽象成员方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-6-接口"><a href="#2-6-接口" class="headerlink" title="2.6 接口"></a>2.6 接口</h4><ul>
+<li><p>包含常量、抽象方法、默认方法、静态方法、私有方法</p>
+</li>
+<li><p>是另外一种引用数据类型</p>
+<ul>
+<li>一定要明确它并不是类</li>
+<li>引用数据类型：数组，类，接口。</li>
+</ul>
+</li>
+<li><p>包含的内容：抽象方法；默认方法；静态方法；私有方法；</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//格式</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> 接口名称</span>&#123;</span><br><span class="line">	<span class="comment">// 抽象方法:使用 abstract 关键字修饰，可以省略，没有方法体，public也可省略。</span></span><br><span class="line">    <span class="comment">// 默认方法:使用 default 修饰，不可省略，供子类(实现类)调用或者子类重写(二选一)。</span></span><br><span class="line">    <span class="comment">// 静态方法:使用 static 修饰，供接口直接调用。不可以通过实现类的类名或者实现类的对象调用</span></span><br><span class="line">    <span class="comment">// 私有方法:使用 private 修饰，私有方法：只有默认方法可以调用。私有静态方法：默认方法和静态方法可以调用。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接口的实现</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名 <span class="keyword">implements</span> 接口名 </span>&#123;</span><br><span class="line">    <span class="comment">// 重写接口中抽象方法【必须】</span></span><br><span class="line">    <span class="comment">// 重写接口中默认方法【可选】   </span></span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//1. 必须重写接口中所有抽象方法。</span></span><br><span class="line"><span class="comment">//2. 继承了接口的默认方法，即可以直接调用，也可以重写。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接口中，有多个抽象方法时，实现类必须重写所有抽象方法。如果抽象方法有<strong>重名的，只需要重写一次</strong>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">showA</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">showB</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">implements</span> <span class="title">A</span>,<span class="title">B</span></span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"showA"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showB</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"showB"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"show"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接口中，有多个默认方法时，实现类都可继承使用。如果默认方法<strong>有重名的，必须重写一次</strong>。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">void</span> <span class="title">methodA</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">void</span> <span class="title">methodB</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">implements</span> <span class="title">A</span>,<span class="title">B</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"method"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>存在<strong>同名的静态方法</strong>并<strong>不会冲突</strong>，原因是只能通过各自接口名访问静态方法。</p>
+<ul>
+<li>当一个类，既继承一个父类，又实现若干个接口时，父类中的成员方法与接口中的默认方法重名，子类<strong>就近</strong>选择执<br>行<strong>父类的成员方法</strong>。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">void</span> <span class="title">methodA</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"AAAAAAAAAAAA"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodA</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"DDDDDDDDDDDD"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">D</span> <span class="keyword">implements</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 未重写methodA方法   </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        C c = <span class="keyword">new</span> C();</span><br><span class="line">        c.methodA(); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">输出结果:</span><br><span class="line">DDDDDDDDDDDD</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接口的多继承</p>
+<ul>
+<li><p>如果父接口中的<strong>默认方法</strong>有重名的，那么子接口需要重写一次。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"AAAAAAAAAAAAAAAAAAA"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"BBBBBBBBBBBBBBBBBBB"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">D</span> <span class="keyword">extends</span> <span class="title">A</span>,<span class="title">B</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"DDDDDDDDDDDDDD"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>==子接口重写默认方法时，default关键字可以保留；子类重写默认方法时，default关键字不可以保留。==</p>
+</li>
+<li><p>接口中，没有构造方法，不能创建对象。</p>
+</li>
+<li><p>接口中，没有静态代码块。</p>
+</li>
+</ul>
+<hr>
+<h4 id="2-7-内部类"><a href="#2-7-内部类" class="headerlink" title="2.7 内部类"></a>2.7 内部类</h4><ul>
+<li><p>内部类可以直接访问外部类的成员，包括私有成员。</p>
+</li>
+<li><p>外部类要访问内部类的成员，必须要建立内部类的对象。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">外部类名.内部类名 对象名 &#x3D; new 外部类型().new 内部类型()；</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-7-1成员内部类"><a href="#2-7-1成员内部类" class="headerlink" title="2.7.1成员内部类"></a>2.7.1成员内部类</h5><p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200924213940138.png" alt="image-20200924213940138"></p>
+<h5 id="2-7-2匿名内部类"><a href="#2-7-2匿名内部类" class="headerlink" title="2.7.2匿名内部类"></a>2.7.2匿名内部类</h5><p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200924221310736.png" alt="image-20200924221310736"></p>
+</li>
+</ul>
 <h3 id="3、API"><a href="#3、API" class="headerlink" title="3、API"></a>3、API</h3><h4 id="3-1、Scanner"><a href="#3-1、Scanner" class="headerlink" title="3.1、Scanner"></a>3.1、Scanner</h4><ul>
 <li><input disabled type="checkbox"> </li>
 </ul>
@@ -689,52 +844,12 @@
 <li><input disabled type="checkbox"> String</li>
 <li><input disabled type="checkbox"> </li>
 </ul>
-<h3 id="4、继承"><a href="#4、继承" class="headerlink" title="4、继承"></a>4、继承</h3><h4 id="4-1-继承的格式"><a href="#4-1-继承的格式" class="headerlink" title="4.1 继承的格式"></a>4.1 继承的格式</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 父类</span>&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 子类 <span class="keyword">extends</span> 父类 </span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//成员变量</span></span><br><span class="line"><span class="comment">//子类的方法可以用父类的非私有变量；若重名，super.父类变量,this.子类变量</span></span><br><span class="line"><span class="comment">//父类中的私有变量若进行访问，照样getXxx,setXxx;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//成员方法</span></span><br><span class="line"><span class="comment">//不重名，调用时现在子类找，若无再在父类找</span></span><br><span class="line"><span class="comment">//重名(返回类型、方法名、参数列表相同)-&gt;&gt;方法重写-&gt;&gt;只执行重写后的方法</span></span><br><span class="line"><span class="comment">//子类方法覆盖父类方法，必须要保证权限大于等于父类权限。</span></span><br><span class="line"><span class="comment">//public&gt;protected &gt; (default) &gt; private</span></span><br><span class="line"><span class="comment">//子类方法覆盖父类方法，返回值类型、函数名和参数列表都要一模一样。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*构造方法</span></span><br><span class="line"><span class="comment">构造方法与类名一致，以子类是无法继承；构造方法用于初始化成员变量；</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">phone</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> money=<span class="number">6</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"发短信"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"打电话"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shouNum</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"电话号码"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">phone</span><span class="params">()</span></span>&#123;&#125;;</span><br><span class="line">    <span class="function">publiv <span class="title">phone</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/******************************************************************************/</span></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">newPhone</span> <span class="keyword">extends</span> <span class="title">phone</span></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> money=<span class="number">7</span>;									<span class="comment">//super 调用父类成员变量</span></span><br><span class="line">/---------------------------------------------------------------------/</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shouNum</span><span class="params">()</span></span>&#123;</span><br><span class="line">         <span class="keyword">super</span>.shouNum();							<span class="comment">//super 调用父类成员方法</span></span><br><span class="line">         System.out.println(<span class="string">"电话号"</span>);</span><br><span class="line">         System.out.println(<span class="string">"个人头像"</span>);</span><br><span class="line">     &#125;</span><br><span class="line">    			 	</span><br><span class="line">/-----------------------------------------------------------------------/  </span><br><span class="line">     <span class="comment">//调用父类构造方法</span></span><br><span class="line">     <span class="comment">//调用父类重载构造方法(每一个构造函数中super只能有一个，必须是子类构造方法的第一个语句！！！)</span></span><br><span class="line">    <span class="comment">//子类的构造函数一定会先执行父类中的构造函数；</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">newPhone</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//默认有个super()</span></span><br><span class="line">&#125;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="title">newPhone</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">   	<span class="keyword">super</span>(<span class="keyword">int</span> a) ;   </span><br><span class="line">&#125;</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/******************************************************************************/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">phonemedo1</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        newPhone p = <span class="keyword">new</span> newPhone()&#123;&#125;;</span><br><span class="line">        p.shouNum();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200509163357404.png" alt="image-20200509163357404"></p>
 <p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200512214341451.png" alt="image-20200512214341451"></p>
-<h5 id="-2"><a href="#-2" class="headerlink" title></a></h5><h5 id="继承的特点"><a href="#继承的特点" class="headerlink" title="继承的特点"></a>继承的特点</h5><ul>
-<li><p>一个类只能有一个父类，不可以有多个父类</p>
-</li>
-<li><p>Java支持多层继承(继承体系)。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class A&#123;&#125; 					&#x2F;&#x2F;顶层父类是Object类。</span><br><span class="line">class B extends A&#123;&#125; </span><br><span class="line">class C extends B&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
 <p>​    </p>
 <hr>
-<h3 id="5、抽象"><a href="#5、抽象" class="headerlink" title="5、抽象"></a>5、抽象</h3><h5 id="5-1-格式"><a href="#5-1-格式" class="headerlink" title="5.1 格式"></a>5.1 格式</h5><p>​    </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//抽象的父类中的抽象成员方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span>&#123;	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>; <span class="comment">//多abstract 去掉大括号</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;&#125;;<span class="comment">//非抽象成员方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//必须子类去继承抽象类</span></span><br><span class="line"><span class="comment">//子类必须覆盖重写父类中的所有抽象成员方法；</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"猫吃鱼"</span>)；</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//创建对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo1</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Cat cat = <span class="keyword">new</span> Cat(); 		<span class="comment">//抽象类中的构造，不能直接new，需要子类Cat继承后再new</span></span><br><span class="line">        cat.eat();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="5-2-注意事项"><a href="#5-2-注意事项" class="headerlink" title="5.2 注意事项"></a>5.2 注意事项</h5><h6 id="5-2-1static"><a href="#5-2-1static" class="headerlink" title="5.2.1static"></a>5.2.1static</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hero</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String name; <span class="comment">//实例属性，对象属性，非静态属性</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">float</span> hp;</span><br><span class="line">    <span class="keyword">static</span> String copyright;<span class="comment">//类属性,静态属性</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Hero garen =  <span class="keyword">new</span> Hero();</span><br><span class="line">        garen.name = <span class="string">"盖伦"</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(garen.name);</span><br><span class="line">        System.out.println(garen.copyright);				<span class="comment">//未初始化 所以为null</span></span><br><span class="line"></span><br><span class="line">        Hero.copyright = <span class="string">"版权由Riot Games公司所有"</span>;</span><br><span class="line"></span><br><span class="line">        Hero teemo =  <span class="keyword">new</span> Hero();</span><br><span class="line">        teemo.name = <span class="string">"提莫"</span>;</span><br><span class="line">        System.out.println(teemo.name);</span><br><span class="line">        System.out.println(teemo.copyright);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li>在一个类方法中，不能直接调用一个对象方法 ，因为对象方法一定要有对象，然后对象名.方法名字，而静态方法不用对象；</li>
-</ul>
-<p><strong>应用于自动编号！</strong></p>
-<ul>
-<li><strong>static修饰成员变量</strong>时，该变量是公共的 具体对象.该变量，会改变所有的，最好用类.变量去更改</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       (<span class="keyword">new</span> Person(<span class="number">122</span>,<span class="string">"zhangsan"</span>)).country=<span class="string">"中华人民共和国"</span>；<span class="comment">//某个对象的全局属性改变，全部对象都变；</span></span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> clsaa <span class="title">Person</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">static</span> String country;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Class</span><span class="params">()</span></span>&#123;&#125;;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Class</span><span class="params">(<span class="keyword">int</span> age,String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age=age;</span><br><span class="line">        <span class="keyword">this</span>.name=name;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>static修饰方法</strong></li>
-</ul>
-<p>static方法只能调用static属性和static方法；非static方法允许调用static属性和static方法；</p>
-<p>static方法中不能有this，因为没有实例化对象；</p>
-<img data-src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20200523214756159.png" alt="image-20200523214756159" style="zoom:50%;">
-
-<p><strong>注意其中this的用法；</strong></p>
-<h3 id="6、接口"><a href="#6、接口" class="headerlink" title="6、接口"></a>6、接口</h3><ul>
-<li><p>是引用数据类型</p>
-</li>
-<li><p>接口格式</p>
-<p>public interface 借口名称 {</p>
-<p>}</p>
-</li>
-<li><p>包含的内容：常量；抽象方法；默认方法；静态方法；私有方法；</p>
-<ul>
-<li><input disabled type="checkbox"> 抽象方法</li>
+<li><ul>
+<li><input disabled type="checkbox"> </li>
 </ul>
 </li>
 </ul>
@@ -763,22 +878,6 @@
 <h4 id="Random类"><a href="#Random类" class="headerlink" title="Random类"></a>Random类</h4><p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200509150316211.png" alt="image-20200509150316211"></p>
 <p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200509151440310.png" alt="image-20200509151440310"></p>
 <h4 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h4><p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200509152717995.png" alt="image-20200509152717995"></p>
-<h3 id="7、Final"><a href="#7、Final" class="headerlink" title="7、Final"></a>7、Final</h3><p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200513114824809.png" alt="image-20200513114824809"></p>
-<img data-src="C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20200513115230026.png" alt="image-20200513115230026" style="zoom:67%;">
-
-<p>​                    final类的方法不能覆盖重写，因为不能被继承 </p>
-<p>2final修饰方法</p>
-<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200513123923805.png" alt="image-20200513123923805"></p>
-<p>​        能有子类</p>
-<ul>
-<li>对于类和方法 abstract和final 矛盾 不能同时使用</li>
-</ul>
-<p>3final修饰局部变量</p>
-<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><p>继承-&gt;&gt;方法重写-&gt;&gt;父类引用指向子类对象；此外，接口的实现也可以多态</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"叫一声"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">ani</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"animal"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"喵~"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">cat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"cat"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Animal a=<span class="keyword">new</span> Cat();</span><br><span class="line">        a.shout();   <span class="comment">//a自动向上转型 对于其他方法只能调用a内的，而重写方法调用=号右侧对象的方法</span></span><br><span class="line">        a.ani();		<span class="comment">//向下转型需要强转；</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//喵~</span></span><br><span class="line"><span class="comment">//animal</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h3 id="8、内部类"><a href="#8、内部类" class="headerlink" title="8、内部类"></a>8、内部类</h3><h4 id="8-1分类"><a href="#8-1分类" class="headerlink" title="8.1分类"></a>8.1分类</h4><ul>
 <li><p>成员内部类</p>
 <p>定义格式：    </p>
@@ -912,131 +1011,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Maven学习笔记</title>
-    <url>/2020/06/02/Maven%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="一、Maven的作用"><a href="#一、Maven的作用" class="headerlink" title="一、Maven的作用"></a>一、Maven的作用</h1><ul>
-<li>maven可以管理jar包</li>
-<li>自动下载jar和源代码</li>
-<li>管理jar包的依赖</li>
-<li>管理需要的jar版本</li>
-<li>编译程序，java文件编译为class文件</li>
-<li>测试代码是否正确</li>
-<li>打包文档成jar或war文件</li>
-<li>部署项目</li>
-</ul>
-<h1 id="二、构建"><a href="#二、构建" class="headerlink" title="二、构建"></a>二、构建</h1><p>项目的构建是面向过程的：编译、测试、运行、打包、部署等；</p>
-<p>maven支持的构建：</p>
-<pre><code>- 清理；删掉之前的编译
-- 编译：批量编译源代码
-- 测试：可批量执行测试程序代码，同时测试很多功能
-- 报告：生成测试结果报告
-- 打包：把项目中所有的class文件，配置文件等所有资源放到压缩文件中；
-- 安装：把上一步中的jar war文件 安装到本地仓库；
-- 部署：把程序安装好可以执行</code></pre><h1 id="三、Maven核心概念"><a href="#三、Maven核心概念" class="headerlink" title="三、Maven核心概念"></a>三、Maven核心概念</h1><ul>
-<li>POM</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span> 		//maven模型的版本，现在只能是4.0.0</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.e groupId&gt;		//任意字符串；组织ID 一般是唯一的，是公司域名+项目名的倒写</span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>com.mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>//指定项目名字 对应上面id中的项目名</span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span> 	//项目的版本号，如果还在开发，通常在版本后加SNAPSHOT</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li><p><strong>约定</strong>的目录结构</p>
-</li>
-<li><p>坐标</p>
-<p>  <groupId>   <artifactId>  <version> 总称为坐标（唯一的标识）</version></artifactId></groupId></p>
-</li>
-<li><p>依赖管理</p>
-</li>
-<li><p>仓库管理</p>
-</li>
-</ul>
-<p>仓库：jar包的下载不需要认为操作</p>
-<ul>
-<li><p>存放jar  </p>
-<ul>
-<li>包括maven使用的插件（各种jar包）</li>
-<li>项目使用的jar（第三方工具）</li>
-</ul>
-</li>
-<li><p>分类</p>
-<ul>
-<li>本地仓库</li>
-<li><a href="https://repo.maven.apache.org/maven2/" target="_blank" rel="noopener">中央仓库</a></li>
-<li>中央仓库的镜像</li>
-<li>私服，公司内部的局域网服务器；</li>
-</ul>
-</li>
-<li><p>生命周期</p>
-</li>
-<li><p>插件和目标</p>
-</li>
-<li><p>继承</p>
-</li>
-<li><p>聚合</p>
-</li>
-</ul>
-<h1 id="四、Maven的安装和配置"><a href="#四、Maven的安装和配置" class="headerlink" title="四、Maven的安装和配置"></a>四、Maven的安装和配置</h1><h2 id="4-1-JDK1-8"><a href="#4-1-JDK1-8" class="headerlink" title="4.1 JDK1.8"></a>4.1 JDK1.8</h2><p>安装</p>
-<ul>
-<li><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">下载地址</a></li>
-<li><a href="https://blog.csdn.net/weixin_37601546/article/details/88623530" target="_blank" rel="noopener">安装步骤</a></li>
-<li>注意：安装过程会提示安装jre，无需安装，jdk中已经含有jre </li>
-</ul>
-<p>配置</p>
-<ul>
-<li>Java的环境变量需要配置三个：JAVA_HOME、Path、ClassPath </li>
-<li>JAVA_HOME：它的作用是指向JDK的安装目录，Tomcat、Idea、Eclipse等软件就是通过它来找到并使用安装好的JDK </li>
-<li>Path： 作用是指定命令搜索路径，在执行命令javac或java时，它会到Path变量所指定的路径中查找看是否能找到相应的命令程序。我们需要把JDK安装目录下的bin目录增加到现有的Path变量中，bin目录中包含经常要用到的可执行文件javac、java、javadoc等，设置好Path变量后，就可以在任何目录下执行javac、java等命令</li>
-<li>ClassPath：它的作用是指定类搜索路径，要使用已经编写好的类，前提当然是能够找到它们了，JVM就是通过ClassPath来寻找类的.class文件。我们需要把JDK安装目录下的lib子目录中的dt.jar和tools.jar设置到ClassPath中，当然，当前目录“.”也必须加入到该变量中</li>
-</ul>
-<h2 id="4-2Maven工具的安装和配置"><a href="#4-2Maven工具的安装和配置" class="headerlink" title="4.2Maven工具的安装和配置"></a>4.2Maven工具的安装和配置</h2><ul>
-<li><p><a href="https://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/" target="_blank" rel="noopener">下载地址</a></p>
-</li>
-<li><p>解压安装包</p>
-<ul>
-<li>bin： 执行程序</li>
-<li>conf： maven工具本身的配置文件setting.xml</li>
-</ul>
-</li>
-<li><p>配置环境变量</p>
-<p>​    环境变量中，指定M2_HOME，value为bin之前的目录</p>
-<p>​    path 中加入 %M2_HOME%\bin;</p>
-</li>
-</ul>
-<p>cmd中：mvn -v测试安装。</p>
-<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200603110946585.png" alt="image-20200603110946585"></p>
-<p>本地仓库：C:\Users\Lenovo.m2\repository</p>
-<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200603111529125.png" alt="image-20200603111529125"></p>
-<ul>
-<li><ul>
-<li></li>
-</ul>
-</li>
-</ul>
-<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200603202025488.png" alt="image-20200603202025488"></p>
-<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200603205448637.png" alt="image-20200603205448637"></p>
-<h1 id="五、Maven在IDEA中的应用"><a href="#五、Maven在IDEA中的应用" class="headerlink" title="五、Maven在IDEA中的应用"></a>五、Maven在IDEA中的应用</h1><h1 id="六、依赖管理"><a href="#六、依赖管理" class="headerlink" title="六、依赖管理"></a>六、依赖管理</h1><h1 id="七、常用设置"><a href="#七、常用设置" class="headerlink" title="七、常用设置"></a>七、常用设置</h1>]]></content>
-      <tags>
-        <tag>Maven</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OSM数据下载和处理</title>
-    <url>/2020/06/25/OSM%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<p><a href="https://blog.csdn.net/qq_912917507/article/details/104274695?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase" target="_blank" rel="noopener">https://blog.csdn.net/qq_912917507/article/details/104274695?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>PCA的数学原理</title>
-    <url>/2020/07/02/PCA%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<blockquote>
-<p>PCA原理</p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>PCA、降维、矩阵变换</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Landset8图像处理和水体提取</title>
     <url>/2020/06/01/Landset8%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%92%8C%E6%B0%B4%E4%BD%93%E6%8F%90%E5%8F%96/</url>
     <content><![CDATA[<h2 id="一、图像处理整体思路步骤"><a href="#一、图像处理整体思路步骤" class="headerlink" title="一、图像处理整体思路步骤"></a>一、图像处理整体思路步骤</h2><h3 id="1、多光谱波段"><a href="#1、多光谱波段" class="headerlink" title="1、多光谱波段"></a>1、多光谱波段</h3><p><img data-src="buzhou.jpg" alt="avatar"></p>
@@ -1154,6 +1128,23 @@
       <tags>
         <tag>NDWI</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>PCA的数学原理</title>
+    <url>/2020/07/02/PCA%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<blockquote>
+<p>PCA原理</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>PCA、降维、矩阵变换</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OSM数据下载和处理</title>
+    <url>/2020/06/25/OSM%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<p><a href="https://blog.csdn.net/qq_912917507/article/details/104274695?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase" target="_blank" rel="noopener">https://blog.csdn.net/qq_912917507/article/details/104274695?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase</a></p>
+]]></content>
   </entry>
   <entry>
     <title>hexo博客nexT主题优化</title>
@@ -1317,53 +1308,24 @@
       </tags>
   </entry>
   <entry>
-    <title>实验</title>
-    <url>/2020/09/17/%E5%AE%9E%E9%AA%8C/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Mybatis学习笔记一</title>
-    <url>/2020/06/01/Mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</url>
-    <content><![CDATA[<h1 id="一、Mybatis环境和知识储备前提"><a href="#一、Mybatis环境和知识储备前提" class="headerlink" title="一、Mybatis环境和知识储备前提"></a>一、Mybatis环境和知识储备前提</h1><ul>
-<li>JDK1.8</li>
-<li>Mysql 5.7</li>
-<li>maven3.6.1</li>
-<li>IDEA<ul>
-<li>JDBC</li>
-<li>Mysql</li>
-<li>Java基础</li>
-<li>Maven</li>
-<li>Junit</li>
-</ul>
-</li>
-</ul>
-<h1 id="二、简介"><a href="#二、简介" class="headerlink" title="二、简介"></a>二、简介</h1><p><a href="https://mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">中文文档</a></p>
-<p><a href="https://github.com/mybatis/mybatis-3/" target="_blank" rel="noopener">Github</a></p>
-<p><a href="https://mvnrepository.com/" target="_blank" rel="noopener">maven中央仓库</a></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.mybatis/mabits --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <title>equals和==比较</title>
+    <url>/2020/09/24/equals%E5%92%8C-%E6%AF%94%E8%BE%83/</url>
+    <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public boolean equals(Object obj) &#123;</span><br><span class="line">    return (this &#x3D;&#x3D; obj);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p> MyBatis 是一款优秀的<strong>持久层框架</strong> ,</p>
-<ul>
-<li><p>数据持久化：将程序的数据在持久状态（数据库jdbc、IO）和瞬时状态（内存）转化的过程</p>
-</li>
-<li><p>持久层：完成持久化工作的代码块</p>
-</li>
+<p>由equals的源码可以看出这里定义的equals与==是等效的；不同的原因就在于有些类（像String、Integer、Date等类）对equals进行了重写。</p>
+<h3 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h3><ul>
+<li>基本数据类型：没有equal方法；</li>
+<li>引用数据类型：因为String，八种基本数据类型的包装类都覆写了equals方法，因此equals比较的是内容；其他引用数据类型如果没有覆写equals方法，则判断是否指向同一个引用。</li>
 </ul>
-<h1 id="三、第一个Mybatis程序"><a href="#三、第一个Mybatis程序" class="headerlink" title="三、第一个Mybatis程序"></a>三、第一个Mybatis程序</h1><p>思路：搭建环境-&gt;导入mybatis-&gt;编写代码-&gt;测试</p>
-<h2 id="3-1搭建环境"><a href="#3-1搭建环境" class="headerlink" title="3.1搭建环境"></a>3.1搭建环境</h2><h3 id="3-1-1搭建数据库"><a href="#3-1-1搭建数据库" class="headerlink" title="3.1.1搭建数据库"></a>3.1.1搭建数据库</h3><p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200602125129140.png" alt="image-20200602125129140"></p>
+<h3 id="“-”"><a href="#“-”" class="headerlink" title="“==”"></a>“==”</h3><hr>
+<ul>
+<li>基本数据类型：判断值是否相等；</li>
+<li>引用数据类型：判断是否指向同一个引用(<strong>堆内存地址</strong>)。</li>
+</ul>
+<p><strong>“==”比”equals”运行速度快,因为只是比较引用。</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">        <span class="comment">//String s="abce"是一种非常特殊的形式,和new 有本质的区别。</span></span><br><span class="line">        String str0 = <span class="string">"Hello"</span>;	<span class="comment">// 放在常量池中</span></span><br><span class="line">        String str1 = <span class="string">"Hello"</span>;	<span class="comment">// 从常量池中查找</span></span><br><span class="line">        String str2 = <span class="keyword">new</span> String(<span class="string">"Hello"</span>);</span><br><span class="line">        String str3 = str2; <span class="comment">// 引用传递</span></span><br><span class="line">        System.out.println(str1 == str2); <span class="comment">// false</span></span><br><span class="line">        System.out.println(str1 == str3); <span class="comment">// false</span></span><br><span class="line">        System.out.println(str2 == str3); <span class="comment">// true</span></span><br><span class="line">        System.out.println(str1.equals(str2)); <span class="comment">// true</span></span><br><span class="line">        System.out.println(str1.equals(str3)); <span class="comment">// true</span></span><br><span class="line">        System.out.println(str2.equals(str3)); <span class="comment">// true</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//基本数据类型："=="&gt;&gt;比较值</span></span><br><span class="line">        <span class="keyword">int</span> a1=<span class="number">1</span>;<span class="keyword">double</span> b1=<span class="number">1.0</span>;</span><br><span class="line">        System.out.println(a1==b1);       <span class="comment">//true值相等</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//包装类</span></span><br><span class="line">        ？？？？</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
-      <tags>
-        <tag>Mybatis Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>最短路算法</title>
-    <url>/2020/06/17/%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>一、</p>
-]]></content>
-      <tags>
-        <tag>Dijkstra算法，Floyd算法</tag>
-      </tags>
   </entry>
   <entry>
     <title>hexo博客搭建</title>
@@ -1404,6 +1366,123 @@
 ]]></content>
       <tags>
         <tag>hexo nexT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Maven学习笔记</title>
+    <url>/2020/06/02/Maven%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="一、Maven的作用"><a href="#一、Maven的作用" class="headerlink" title="一、Maven的作用"></a>一、Maven的作用</h1><ul>
+<li>maven可以管理jar包</li>
+<li>自动下载jar和源代码</li>
+<li>管理jar包的依赖</li>
+<li>管理需要的jar版本</li>
+<li>编译程序，java文件编译为class文件</li>
+<li>测试代码是否正确</li>
+<li>打包文档成jar或war文件</li>
+<li>部署项目</li>
+</ul>
+<h1 id="二、构建"><a href="#二、构建" class="headerlink" title="二、构建"></a>二、构建</h1><p>项目的构建是面向过程的：编译、测试、运行、打包、部署等；</p>
+<p>maven支持的构建：</p>
+<pre><code>- 清理；删掉之前的编译
+- 编译：批量编译源代码
+- 测试：可批量执行测试程序代码，同时测试很多功能
+- 报告：生成测试结果报告
+- 打包：把项目中所有的class文件，配置文件等所有资源放到压缩文件中；
+- 安装：把上一步中的jar war文件 安装到本地仓库；
+- 部署：把程序安装好可以执行</code></pre><h1 id="三、Maven核心概念"><a href="#三、Maven核心概念" class="headerlink" title="三、Maven核心概念"></a>三、Maven核心概念</h1><ul>
+<li>POM</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span> 		//maven模型的版本，现在只能是4.0.0</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.e groupId&gt;		//任意字符串；组织ID 一般是唯一的，是公司域名+项目名的倒写</span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>com.mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>//指定项目名字 对应上面id中的项目名</span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span> 	//项目的版本号，如果还在开发，通常在版本后加SNAPSHOT</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p><strong>约定</strong>的目录结构</p>
+</li>
+<li><p>坐标</p>
+<p>  <groupId>   <artifactId>  <version> 总称为坐标（唯一的标识）</version></artifactId></groupId></p>
+</li>
+<li><p>依赖管理</p>
+</li>
+<li><p>仓库管理</p>
+</li>
+</ul>
+<p>仓库：jar包的下载不需要认为操作</p>
+<ul>
+<li><p>存放jar  </p>
+<ul>
+<li>包括maven使用的插件（各种jar包）</li>
+<li>项目使用的jar（第三方工具）</li>
+</ul>
+</li>
+<li><p>分类</p>
+<ul>
+<li>本地仓库</li>
+<li><a href="https://repo.maven.apache.org/maven2/" target="_blank" rel="noopener">中央仓库</a></li>
+<li>中央仓库的镜像</li>
+<li>私服，公司内部的局域网服务器；</li>
+</ul>
+</li>
+<li><p>生命周期</p>
+</li>
+<li><p>插件和目标</p>
+</li>
+<li><p>继承</p>
+</li>
+<li><p>聚合</p>
+</li>
+</ul>
+<h1 id="四、Maven的安装和配置"><a href="#四、Maven的安装和配置" class="headerlink" title="四、Maven的安装和配置"></a>四、Maven的安装和配置</h1><h2 id="4-1-JDK1-8"><a href="#4-1-JDK1-8" class="headerlink" title="4.1 JDK1.8"></a>4.1 JDK1.8</h2><p>安装</p>
+<ul>
+<li><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">下载地址</a></li>
+<li><a href="https://blog.csdn.net/weixin_37601546/article/details/88623530" target="_blank" rel="noopener">安装步骤</a></li>
+<li>注意：安装过程会提示安装jre，无需安装，jdk中已经含有jre </li>
+</ul>
+<p>配置</p>
+<ul>
+<li>Java的环境变量需要配置三个：JAVA_HOME、Path、ClassPath </li>
+<li>JAVA_HOME：它的作用是指向JDK的安装目录，Tomcat、Idea、Eclipse等软件就是通过它来找到并使用安装好的JDK </li>
+<li>Path： 作用是指定命令搜索路径，在执行命令javac或java时，它会到Path变量所指定的路径中查找看是否能找到相应的命令程序。我们需要把JDK安装目录下的bin目录增加到现有的Path变量中，bin目录中包含经常要用到的可执行文件javac、java、javadoc等，设置好Path变量后，就可以在任何目录下执行javac、java等命令</li>
+<li>ClassPath：它的作用是指定类搜索路径，要使用已经编写好的类，前提当然是能够找到它们了，JVM就是通过ClassPath来寻找类的.class文件。我们需要把JDK安装目录下的lib子目录中的dt.jar和tools.jar设置到ClassPath中，当然，当前目录“.”也必须加入到该变量中</li>
+</ul>
+<h2 id="4-2Maven工具的安装和配置"><a href="#4-2Maven工具的安装和配置" class="headerlink" title="4.2Maven工具的安装和配置"></a>4.2Maven工具的安装和配置</h2><ul>
+<li><p><a href="https://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/" target="_blank" rel="noopener">下载地址</a></p>
+</li>
+<li><p>解压安装包</p>
+<ul>
+<li>bin： 执行程序</li>
+<li>conf： maven工具本身的配置文件setting.xml</li>
+</ul>
+</li>
+<li><p>配置环境变量</p>
+<p>​    环境变量中，指定M2_HOME，value为bin之前的目录</p>
+<p>​    path 中加入 %M2_HOME%\bin;</p>
+</li>
+</ul>
+<p>cmd中：mvn -v测试安装。</p>
+<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200603110946585.png" alt="image-20200603110946585"></p>
+<p>本地仓库：C:\Users\Lenovo.m2\repository</p>
+<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200603111529125.png" alt="image-20200603111529125"></p>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200603202025488.png" alt="image-20200603202025488"></p>
+<p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200603205448637.png" alt="image-20200603205448637"></p>
+<h1 id="五、Maven在IDEA中的应用"><a href="#五、Maven在IDEA中的应用" class="headerlink" title="五、Maven在IDEA中的应用"></a>五、Maven在IDEA中的应用</h1><h1 id="六、依赖管理"><a href="#六、依赖管理" class="headerlink" title="六、依赖管理"></a>六、依赖管理</h1><h1 id="七、常用设置"><a href="#七、常用设置" class="headerlink" title="七、常用设置"></a>七、常用设置</h1>]]></content>
+      <tags>
+        <tag>Maven</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>最短路算法</title>
+    <url>/2020/06/17/%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>一、</p>
+]]></content>
+      <tags>
+        <tag>Dijkstra算法，Floyd算法</tag>
       </tags>
   </entry>
   <entry>
@@ -1450,6 +1529,41 @@
 ]]></content>
       <tags>
         <tag>Java数据结构与算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mybatis学习笔记一</title>
+    <url>/2020/06/01/Mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</url>
+    <content><![CDATA[<h1 id="一、Mybatis环境和知识储备前提"><a href="#一、Mybatis环境和知识储备前提" class="headerlink" title="一、Mybatis环境和知识储备前提"></a>一、Mybatis环境和知识储备前提</h1><ul>
+<li>JDK1.8</li>
+<li>Mysql 5.7</li>
+<li>maven3.6.1</li>
+<li>IDEA<ul>
+<li>JDBC</li>
+<li>Mysql</li>
+<li>Java基础</li>
+<li>Maven</li>
+<li>Junit</li>
+</ul>
+</li>
+</ul>
+<h1 id="二、简介"><a href="#二、简介" class="headerlink" title="二、简介"></a>二、简介</h1><p><a href="https://mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">中文文档</a></p>
+<p><a href="https://github.com/mybatis/mybatis-3/" target="_blank" rel="noopener">Github</a></p>
+<p><a href="https://mvnrepository.com/" target="_blank" rel="noopener">maven中央仓库</a></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.mybatis/mabits --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> MyBatis 是一款优秀的<strong>持久层框架</strong> ,</p>
+<ul>
+<li><p>数据持久化：将程序的数据在持久状态（数据库jdbc、IO）和瞬时状态（内存）转化的过程</p>
+</li>
+<li><p>持久层：完成持久化工作的代码块</p>
+</li>
+</ul>
+<h1 id="三、第一个Mybatis程序"><a href="#三、第一个Mybatis程序" class="headerlink" title="三、第一个Mybatis程序"></a>三、第一个Mybatis程序</h1><p>思路：搭建环境-&gt;导入mybatis-&gt;编写代码-&gt;测试</p>
+<h2 id="3-1搭建环境"><a href="#3-1搭建环境" class="headerlink" title="3.1搭建环境"></a>3.1搭建环境</h2><h3 id="3-1-1搭建数据库"><a href="#3-1-1搭建数据库" class="headerlink" title="3.1.1搭建数据库"></a>3.1.1搭建数据库</h3><p><img data-src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200602125129140.png" alt="image-20200602125129140"></p>
+]]></content>
+      <tags>
+        <tag>Mybatis Mysql</tag>
       </tags>
   </entry>
 </search>
